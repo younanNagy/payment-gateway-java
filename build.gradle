@@ -2,6 +2,19 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.5'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'com.diffplug.spotless' version '6.25.0'
+}
+
+spotless {
+  java {
+    googleJavaFormat('1.22.0')
+    target 'src/**/*.java'
+  }
+  format 'gradle', {
+    target '*.gradle', 'gradle/*.gradle'
+    indentWithSpaces()
+    endWithNewline()
+  }
 }
 
 group = 'com.checkout'
@@ -19,7 +32,13 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
 
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
 }
 
 tasks.named('test') {
