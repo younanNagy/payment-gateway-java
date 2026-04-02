@@ -1,6 +1,6 @@
 package com.checkout.payment.gateway.repository;
 
-import com.checkout.payment.gateway.model.PostPaymentResponse;
+import com.checkout.payment.gateway.model.PaymentResponse;
 import java.util.HashMap;
 import java.util.Optional;
 import java.util.UUID;
@@ -9,23 +9,23 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PaymentsRepository {
 
-  private final HashMap<UUID, PostPaymentResponse> payments = new HashMap<>();
-  private final HashMap<String, PostPaymentResponse> paymentsByIdempotencyKey = new HashMap<>();
+  private final HashMap<UUID, PaymentResponse> payments = new HashMap<>();
+  private final HashMap<String, PaymentResponse> paymentsByIdempotencyKey = new HashMap<>();
 
-  public void add(PostPaymentResponse payment) {
+  public void add(PaymentResponse payment) {
     payments.put(payment.getId(), payment);
   }
 
-  public void addWithIdempotencyKey(String idempotencyKey, PostPaymentResponse payment) {
+  public void addWithIdempotencyKey(String idempotencyKey, PaymentResponse payment) {
     payments.put(payment.getId(), payment);
     paymentsByIdempotencyKey.put(idempotencyKey, payment);
   }
 
-  public Optional<PostPaymentResponse> get(UUID id) {
+  public Optional<PaymentResponse> get(UUID id) {
     return Optional.ofNullable(payments.get(id));
   }
 
-  public Optional<PostPaymentResponse> getByIdempotencyKey(String idempotencyKey) {
+  public Optional<PaymentResponse> getByIdempotencyKey(String idempotencyKey) {
     return Optional.ofNullable(paymentsByIdempotencyKey.get(idempotencyKey));
   }
 }
