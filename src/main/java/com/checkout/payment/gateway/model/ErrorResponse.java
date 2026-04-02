@@ -1,20 +1,8 @@
 package com.checkout.payment.gateway.model;
 
-public class ErrorResponse {
-  private final String message;
+import com.checkout.payment.gateway.enums.PaymentStatus;
+import java.util.List;
+import lombok.Builder;
 
-  public ErrorResponse(String message) {
-    this.message = message;
-  }
-
-  public String getMessage() {
-    return message;
-  }
-
-  @Override
-  public String toString() {
-    return "ErrorResponse{" +
-        "message='" + message + '\'' +
-        '}';
-  }
-}
+@Builder
+public record ErrorResponse(PaymentStatus paymentStatus, String message, List<String> errors) {}
