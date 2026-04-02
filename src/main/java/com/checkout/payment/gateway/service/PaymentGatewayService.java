@@ -6,8 +6,8 @@ import com.checkout.payment.gateway.exception.EventProcessingException;
 import com.checkout.payment.gateway.exception.PaymentNotFound;
 import com.checkout.payment.gateway.model.BankSimulatorRequest;
 import com.checkout.payment.gateway.model.BankSimulatorResponse;
-import com.checkout.payment.gateway.model.PostPaymentRequest;
 import com.checkout.payment.gateway.model.PaymentResponse;
+import com.checkout.payment.gateway.model.PostPaymentRequest;
 import com.checkout.payment.gateway.repository.PaymentsRepository;
 import com.checkout.payment.gateway.validation.PaymentRequestValidator;
 import java.util.List;
@@ -104,8 +104,7 @@ public class PaymentGatewayService {
     return payment;
   }
 
-  private PaymentResponse buildPaymentResponse(
-      String idempotencyKey, PostPaymentRequest request) {
+  private PaymentResponse buildPaymentResponse(String idempotencyKey, PostPaymentRequest request) {
     String cardNumberLastFour = null;
 
     // Only store last 4 digits — full card number is never persisted
